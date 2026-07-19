@@ -109,6 +109,7 @@
 
 .composer-input {
   flex: 1;
+  min-width: 0;
   padding: 12px 16px;
   border: none;
   border-radius: var(--radius-md);
@@ -121,6 +122,8 @@
 .composer-input::placeholder { color: var(--text-secondary); }
 
 .composer-send {
+  flex-shrink: 0; 
+  white-space: nowrap;
   padding: 0 20px;
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
