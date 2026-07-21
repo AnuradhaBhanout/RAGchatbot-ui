@@ -93,7 +93,16 @@ export function useChat() {
           //   return prev.filter((s) => cited.has(s.paper_id));
           // });
           const citedIds = new Set(d.cited_paper_ids || []);
-          setSources((prev) => prev.filter((s) => citedIds.has(s.paper_id)));
+          //setSources((prev) => prev.filter((s) => citedIds.has(s.paper_id)));
+          setSources((prev) => {
+            const merged = [...prev];
+            for (const p of d.fetched_papers || []) {
+              if (p.paper_id && !merged.some((s) => s.paper_id === p.paper_id)) {
+                merged.push(p);
+              }
+            }
+            return merged.filter((s) => citedIds.has(s.paper_id));
+          });
           
           setStatus(null);
           setBusy(false);
