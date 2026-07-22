@@ -189,6 +189,11 @@
     right: 16px;
     bottom: 16px;
     max-height: 45vh;
+    z-index: 50;
+    background: var(--surface);      /* solid, not the translucent .glass gradient */
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    box-shadow: 0 -8px 32px rgba(0,0,0,0.5);
     transform: translateY(120%);
     transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
@@ -196,6 +201,15 @@
   .evidence.open {
     transform: translateY(0);
   }
+
+
+.evidence.open::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: -1;
+}
 }
 .empty-state {
   flex: 1;
