@@ -190,9 +190,9 @@
     bottom: 16px;
     max-height: 45vh;
     z-index: 50;
-    background: var(--surface);      /* solid, not the translucent .glass gradient */
-    backdrop-filter: blur(24px) saturate(160%);
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    background: #1a1512;            /* fully opaque — pick your actual dark bg hex, no alpha */
+    backdrop-filter: none;          /* remove blur entirely on the mobile drawer */
+    -webkit-backdrop-filter: none;
     box-shadow: 0 -8px 32px rgba(0,0,0,0.5);
     transform: translateY(120%);
     transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
