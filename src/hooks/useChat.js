@@ -87,7 +87,7 @@ export function useChat() {
           setBusy(false);
         },
         onDone: (d) => {
-          setMessages((prev) => [...prev, { role: "assistant", content: d.answer }]);
+          setMessages((prev) => [...prev, { role: "assistant", content: d.answer ,traceId: d.trace_id}]);
           // setSources((prev) => {
           //   const cited = new Set((d.answer.match(/\d{4}\.\d{4,5}(v\d+)?/g) || []));
           //   return prev.filter((s) => cited.has(s.paper_id));
@@ -137,6 +137,14 @@ export function useChat() {
     },
     [runStream]
   );
+  const sendFeedback = useCallback((traceId, isPositive) => {
+    return fetch(`${API_URL}/feedback`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ trace_id: traceId, is_positive: isPositive }),
+    });
+  }, []);
 
-  return { messages, sources, status, pendingClarification, busy, send, resume };
+  return { messages, sources, status, pendingClarification, busy, send, resume, sendFeedback };
+  // return { messages, sources, status, pendingClarification, busy, send, resume };
 }
