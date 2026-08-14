@@ -6,23 +6,40 @@
 //   });
 
 
+// export async function streamChat({ url, body, handlers }) {
+//   let res;
+//   for (let attempt = 0; attempt < 5; attempt++) {
+//     res = await fetch(url, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify(body),
+//     });
+//     if (res.status !== 503) break;
+//     if (attempt < 4) await new Promise(r => setTimeout(r, 2000 * (attempt + 1)));
+//   }
+
+
 export async function streamChat({ url, body, handlers }) {
   let res;
-  for (let attempt = 0; attempt < 5; attempt++) {
-    res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    if (res.status !== 503) break;
-    if (attempt < 4) await new Promise(r => setTimeout(r, 2000 * (attempt + 1)));
-  }
-
-  if (!res.ok || !res.body) {
-    handlers.onError?.(new Error(`Request failed: ${res.status}`));
+  try {
+    for (let attempt = 0; attempt < 5; attempt++) {
+      res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (res.status !== 503) break;
+      if (attempt < 4) await new Promise(r => setTimeout(r, 2000 * (attempt + 1)));
+    }
+  } catch (e) {
+    handlers.onError?.(e instanceof Error ? e : new Error(String(e)));
     return;
   }
 
+    if (!res.ok || !res.body) {
+      handlers.onError?.(new Error(`Request failed: ${res.status}`));
+      return;
+    }
   const reader = res.body.getReader();
   const decoder = new TextDecoder();
   let buffer = "";
