@@ -130,12 +130,13 @@ export function useChat() {
 
   const resume = useCallback(
     (answer) => {
+      const session_id = pendingClarification?.session_id;
       setPendingClarification(null);
       setMessages((prev) => [...prev, { role: "user", content: answer }]);
       setSources([]);
-      return runStream(`${API_URL}/resume`, { session_id: getSessionId(), answer });
+      return runStream(`${API_URL}/resume`, { session_id: session_id, answer });
     },
-    [runStream]
+    [runStream,pendingClarification]
   );
   const sendFeedback = useCallback((traceId, isPositive) => {
     return fetch(`${API_URL}/feedback`, {
