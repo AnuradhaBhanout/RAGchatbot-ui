@@ -1,8 +1,10 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { useChat } from "./hooks/useChat";
 import "./App.css";
+
+const RESEARCH_URL = "https://ragchatbot-research.onrender.com"
 
 const STARTER_PROMPTS = [
   "Summarize recent papers on RAG evaluation",
@@ -14,6 +16,11 @@ export default function App() {
   const [evidenceOpen, setEvidenceOpen] = useState(false);
   const [input, setInput] = useState("");
   const { messages, sources, status, pendingClarification, busy, send, resume } = useChat();
+
+  useEffect(() => {
+    fetch('${import.meta.env.VITE_API_URL}/health').catch(() => {});
+    fetch('${RESEARCH_URL}/health').catch(() => {});
+  },[]);
 
   const hasMessages = messages.length > 0;
   const hasSources = sources.length > 0;
