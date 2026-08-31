@@ -8,7 +8,7 @@ const RESEARCH_URL = "https://ragchatbot-research.onrender.com"
 
 const STARTER_PROMPTS = [
   "Summarize recent papers on RAG evaluation",
-  "Find work on citation faithfulness",
+  "Show me a claim you can't verify and refuse to answer",
   "What's new in retrieval-augmented generation?",
 ];
 
@@ -67,10 +67,10 @@ function handleSend() {
               </>
             ) : (
               <div className="empty-state">
-                <h1 className="empty-title">What are you researching?</h1>
+                <h1 className="empty-title">Ask. We'll verify every citation.</h1>
                 <p className="empty-subtitle">
-                  Ask a question and Delve will search arXiv, read the papers,
-                  and answer with verified citations.
+                  Ask a question and Delve will search, verify every citation against the source,
+                  and refuse to answer if it can't confirm one.
                 </p>
                 <div className="prompt-chips">
                   {STARTER_PROMPTS.map((prompt) => (
