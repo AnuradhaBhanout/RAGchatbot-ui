@@ -299,3 +299,10 @@
   font-size: 13px;
   cursor: pointer;
 }
+
+.tagline {
+  font-size: 0.72em;
+  font-weight: 400;
+  opacity: 0.6;
+  margin-left: 0.75rem;
+}

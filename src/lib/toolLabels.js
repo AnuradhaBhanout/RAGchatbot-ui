@@ -1,5 +1,5 @@
 const TOOL_LABELS = {
-  hybrid_search_papers: "Reading your library...",
+  hybrid_search_papers: "Searching the library...",
   search_papers: "Searching arXiv...",
   extract_info: "Pulling paper details...",
   check_semantic_cache: "Checking previous answers...",

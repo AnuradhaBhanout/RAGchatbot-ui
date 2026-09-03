@@ -42,7 +42,7 @@ function handleSend() {
 
       <div className="shell">
         <header className="topbar glass">
-          <span className="brand">Footnote — every answer, sourced or refused.</span>
+            <span className="brand">Footnote<span className="tagline">every answer, sourced or refused</span></span>
           <button
             className="evidence-toggle"
             onClick={() => setEvidenceOpen(!evidenceOpen)}
@@ -69,7 +69,7 @@ function handleSend() {
               <div className="empty-state">
                 <h1 className="empty-title">Ask. We'll verify every citation.</h1>
                 <p className="empty-subtitle">
-                  Ask a question and Delve will search, verify every citation against the source,
+                  Ask a question and Footnote will search, verify every citation against the source,
                   and refuse to answer if it can't confirm one.
                 </p>
                 <div className="prompt-chips">
