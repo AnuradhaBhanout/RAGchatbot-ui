@@ -42,7 +42,7 @@ function handleSend() {
 
       <div className="shell">
         <header className="topbar glass">
-          <span className="brand">Delve</span>
+          <span className="brand">Footnote — every answer, sourced or refused.</span>
           <button
             className="evidence-toggle"
             onClick={() => setEvidenceOpen(!evidenceOpen)}
