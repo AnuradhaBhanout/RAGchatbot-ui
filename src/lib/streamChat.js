@@ -36,10 +36,17 @@ export async function streamChat({ url, body, handlers }) {
     return;
   }
 
+    if (res.status === 429) {
+      const wait = res.headers.get("Retry-After");
+      handlers.onError?.(new Error(`Too many requests. Try again in ${wait ?? "a minute"}.`));
+      return;
+    }
+
     if (!res.ok || !res.body) {
       handlers.onError?.(new Error(`Request failed: ${res.status}`));
       return;
     }
+    
   const reader = res.body.getReader();
   const decoder = new TextDecoder();
   let buffer = "";
