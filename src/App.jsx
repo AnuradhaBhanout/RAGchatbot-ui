@@ -18,7 +18,7 @@ export default function App() {
   const { messages, sources, status, pendingClarification, busy, send, resume } = useChat();
 
   useEffect(() => {
-    fetch('${import.meta.env.VITE_API_URL}/health').catch(() => {});
+    fetch(`${import.meta.env.VITE_API_URL}/health`).catch(() => {});
     fetch('${RESEARCH_URL}/health').catch(() => {});
   },[]);
 
