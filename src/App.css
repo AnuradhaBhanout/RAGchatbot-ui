@@ -321,3 +321,27 @@
   cursor: pointer;
 }
 .new-chat:disabled { opacity: 0.4; cursor: default; }
+
+
+
+.feedback {
+  display: flex;
+  gap: 4px;
+  margin-top: 10px;
+  opacity: 0.45;
+  transition: opacity 0.15s;
+}
+
+.bubble-assistant:hover .feedback { opacity: 1; }
+
+.feedback button {
+  background: none;
+  border: none;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.feedback button:hover { background: var(--glass-border); }
