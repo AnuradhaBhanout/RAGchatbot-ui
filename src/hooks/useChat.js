@@ -13,13 +13,6 @@ function getSessionId() {
   return id;
 }
 
-const newSession = useCallback(() => {
-  localStorage.removeItem("delve_session_id");
-  setMessages([]);
-  setSources([]);
-  setStatus(null);
-  setPendingClarification(null);
-}, []);
 
 
 export function useChat() {
@@ -147,6 +140,15 @@ export function useChat() {
     },
     [runStream,pendingClarification]
   );
+
+  const newSession = useCallback(() => {
+    localStorage.removeItem("delve_session_id");
+    setMessages([]);
+    setSources([]);
+    setStatus(null);
+    setPendingClarification(null);
+  }, []);
+
   const sendFeedback = useCallback((traceId, isPositive) => {
     return fetch(`${API_URL}/feedback`, {
       method: "POST",
