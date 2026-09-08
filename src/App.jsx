@@ -4,7 +4,7 @@ import { useState ,useEffect} from "react";
 import { useChat } from "./hooks/useChat";
 import "./App.css";
 
-const RESEARCH_URL = "https://ragchatbot-research.onrender.com"
+
 
 const STARTER_PROMPTS = [
   "Summarize recent papers on RAG evaluation",
@@ -15,11 +15,10 @@ const STARTER_PROMPTS = [
 export default function App() {
   const [evidenceOpen, setEvidenceOpen] = useState(false);
   const [input, setInput] = useState("");
-  const { messages, sources, status, pendingClarification, busy, send, resume } = useChat();
+  const { messages, sources, status, pendingClarification, busy, send, resume, newSession } = useChat();
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/health`).catch(() => {});
-    fetch('${RESEARCH_URL}/health').catch(() => {});
   },[]);
 
   const hasMessages = messages.length > 0;
@@ -43,12 +42,14 @@ function handleSend() {
       <div className="shell">
         <header className="topbar glass">
             <span className="brand">Footnote<span className="tagline">every answer, sourced or refused</span></span>
-          <button
-            className="evidence-toggle"
-            onClick={() => setEvidenceOpen(!evidenceOpen)}
-          >
+        <div className="topbar-actions">
+          <button className="new-chat" onClick={newSession} disabled={busy || !hasMessages}>
+            New chat
+          </button>
+          <button className="evidence-toggle" onClick={() => setEvidenceOpen(!evidenceOpen)}>
             Sources · {sources.length}
           </button>
+        </div>
         </header>
 
         <div className="layout">
