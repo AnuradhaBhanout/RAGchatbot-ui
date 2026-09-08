@@ -306,3 +306,18 @@
   opacity: 0.6;
   margin-left: 0.75rem;
 }
+
+
+.topbar-actions { display: flex; align-items: center; gap: 8px; }
+
+.new-chat {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 13px;
+  cursor: pointer;
+}
+.new-chat:disabled { opacity: 0.4; cursor: default; }
