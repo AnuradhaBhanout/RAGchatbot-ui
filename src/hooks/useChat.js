@@ -13,6 +13,15 @@ function getSessionId() {
   return id;
 }
 
+const newSession = useCallback(() => {
+  localStorage.removeItem("delve_session_id");
+  setMessages([]);
+  setSources([]);
+  setStatus(null);
+  setPendingClarification(null);
+}, []);
+
+
 export function useChat() {
   const [messages, setMessages] = useState([]);
   const [sources, setSources] = useState([]);
@@ -146,6 +155,6 @@ export function useChat() {
     });
   }, []);
 
-  return { messages, sources, status, pendingClarification, busy, send, resume, sendFeedback };
+  return { messages, sources, status, pendingClarification, busy, send, resume, sendFeedback, newSession };
   // return { messages, sources, status, pendingClarification, busy, send, resume };
 }
