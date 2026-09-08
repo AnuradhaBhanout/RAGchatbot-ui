@@ -15,7 +15,8 @@ const STARTER_PROMPTS = [
 export default function App() {
   const [evidenceOpen, setEvidenceOpen] = useState(false);
   const [input, setInput] = useState("");
-  const { messages, sources, status, pendingClarification, busy, send, resume, newSession } = useChat();
+  const { messages, sources, status, pendingClarification, busy, send, resume, newSession ,sendFeedback} = useChat();
+  const [voted, setVoted] = useState({});
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/health`).catch(() => {});
@@ -35,6 +36,14 @@ function handleSend() {
     send(query);
   }
 }
+
+function handleVote(traceId, isPositive) {
+  if (voted[traceId] !== undefined) return;
+  setVoted((prev) => ({ ...prev, [traceId]: isPositive }));
+  sendFeedback(traceId, isPositive);
+}
+
+
   return (
     <>
       <div className="scene" />
@@ -62,6 +71,12 @@ function handleSend() {
                     className={`bubble ${m.role === "user" ? "bubble-user glass-accent" : "bubble-assistant glass"}`}
                   >
                     {(<ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown>)}
+                    {m.role === "assistant" && m.traceId && (
+                      <div className="feedback">
+                      <button onClick={() => handleVote(m.traceId, true)} disabled={voted[m.traceId] !== undefined}>👍</button>
+                      <button onClick={() => handleVote(m.traceId, false)} disabled={voted[m.traceId] !== undefined}>👎</button>
+                      </div>
+                    )}
                   </div>
                 ))}
                 {status && <div className="status">{status}</div>}
