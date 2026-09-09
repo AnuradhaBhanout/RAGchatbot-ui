@@ -44,7 +44,7 @@ function handleVote(traceId, isPositive) {
 }
 
 
-  return (
+return (
     <>
       <div className="scene" />
 
