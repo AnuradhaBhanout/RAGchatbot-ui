@@ -345,3 +345,5 @@
 }
 
 .feedback button:hover { background: var(--glass-border); }
+.feedback button:disabled { opacity: 0.3; cursor: default; }
+.feedback button:disabled:hover { background: none; }
