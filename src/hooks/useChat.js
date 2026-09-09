@@ -21,7 +21,7 @@ export function useChat() {
   const [status, setStatus] = useState(null);
   const [pendingClarification, setPendingClarification] = useState(null);
   const [busy, setBusy] = useState(false);
- // const pendingInput = useRef({});
+
 
   const runStream = useCallback((url, body) => {
     setBusy(true);
@@ -158,5 +158,5 @@ export function useChat() {
   }, []);
 
   return { messages, sources, status, pendingClarification, busy, send, resume, sendFeedback, newSession };
-  // return { messages, sources, status, pendingClarification, busy, send, resume };
+ 
 }
