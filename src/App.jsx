@@ -139,8 +139,23 @@ return (
               sources.map((s, i) => (
                 <div className="source-card" key={s.paper_id || i}>
                   <span className="source-badge">✓ verified</span>
-                  <h3>{s.title}</h3>
-                  <p className="source-meta">{Array.isArray(s.authors) ? s.authors.join(", ") : s.authors} · {s.published}</p>
+                  <h3>
+                    
+                  <a  className="source-link"
+                      href={`https://arxiv.org/abs/${s.paper_id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                   >   
+                  {s.title}
+                   </a>
+                  </h3>
+                  <p className="source-meta">{Array.isArray(s.authors) ? s.authors.join(", ") : s.authors} · {s.published}
+                  </p>
+                      {s.pdf_url && (
+                      <a className="source-pdf" href={s.pdf_url} target="_blank" rel="noopener noreferrer">
+                        PDF ↗
+                      </a>
+                    )}
                 </div>
               ))
             ) : (
